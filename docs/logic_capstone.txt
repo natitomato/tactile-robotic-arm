@@ -1,0 +1,22 @@
+arduino waits for serial data from rpi
+rpi camera outputs an image every loop
+vaishnavi code analyses and gives coordinates of orange if exists, else gives orange not found error
+use coordinates and tell whether to move L, R, U or D depending on the centre offset of the picture frame
+outputs command on terminal (we are not sending command to arduino because we are not implementing the motor actuating part we can manually
+ show the movements)
+arduino checks serial data and performs the necessary movements (i.e, manually moving L, R, U or D)
+once it is centered rpi send a serial command to the arduino to start the lidar
+rpi waits for arduino to send serial data
+arduino send distance value, rpi does calculations and checks whether it is close enough,
+							if yes then it sends command to servo to start closing the end effector
+							if no then it tells arduino to switch on lidar again (after which the arudino will send data back)
+everytime arduino sends data to rpi, it also sends strain gauge data (load on end effector).
+rpi tells servo to stop at some threshold we will have to set and also gives command to the other servo to rotate the entire gripper
+after rotation the end effector is released, orange is dropped.
+rpi continues to look for next orange.
+
+
+(Some computations might need to be done in the arduino itself since we don't have time to port some C libraries to python, it might be a
+better practice to do it anyways on the arduino since the python script might take a while to run all the object detection code and whatnot,
+the arduino can simply do the gripping part on it's own, and provide the rpi with the sensor data for analyzing with the only output being
+sending the coordinates and lidar initialization command.)

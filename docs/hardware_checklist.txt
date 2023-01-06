@@ -1,0 +1,8 @@
+remove arduino
+check L7805 output voltage
+check buck converter output voltage
+insert arduino
+run buzzer test code
+run hx711 test code, twice for both end effectors
+run lidar test
+run servo test code, twice for both servos
